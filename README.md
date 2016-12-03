@@ -11,7 +11,7 @@ Sample `docker-compose.yml` file:
 
 ```
 webrick:
-  image: andrius/webrick:latest
+  image: andrius/alpine-webrick:latest
   ports:
     - 8000/tcp:8000/tcp
   volumes:
