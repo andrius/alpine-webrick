@@ -3,13 +3,17 @@ FROM gliderlabs/alpine:3.4
 
 MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
 
-WORKDIR /web
-
-RUN apk --update add ruby \
-&&  touch /web/index.html \
+RUN apk --update add ruby openssl ca-certificates \
+&&  gem install sinatra --no-rdoc --no-ri \
+&&  gem clean \
+&&  apk del openssl ca-certificates \
 &&  rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+
+ADD docker-entrypoint.sh /
+WORKDIR /web
+RUN touch /web/index.html
 
 EXPOSE 8000
 
-ENTRYPOINT ["ruby", "-rwebrick", "-e", "WEBrick::HTTPServer.new(:Port => 8000, :DocumentRoot => Dir.pwd).start"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
