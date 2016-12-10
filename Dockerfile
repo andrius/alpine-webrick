@@ -9,9 +9,8 @@ RUN apk --update add ruby openssl ca-certificates \
 &&  apk del openssl ca-certificates \
 &&  rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
+ADD server.rb /server.rb
 ADD docker-entrypoint.sh /
-WORKDIR /web
-RUN touch /web/index.html
 
 EXPOSE 8000
 
