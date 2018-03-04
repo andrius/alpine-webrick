@@ -2,5 +2,3 @@ webrick:
   build: .
   ports:
     - 8000:8000/tcp
-  volumes:
-    - "./index.html:/web/index.html"

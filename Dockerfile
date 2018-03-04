@@ -29,3 +29,4 @@ ADD docker-entrypoint.sh /
 EXPOSE 8000
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/bin/ruby", "-rsinatra", "/server.rb"]
