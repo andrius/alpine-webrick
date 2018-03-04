@@ -3,11 +3,10 @@ FROM alpine:latest
 
 MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
 
-RUN apk --update add \
-      ruby \
-      openssl \
-      ca-certificates \
-&& gem install sinatra --no-rdoc --no-ri \
+RUN apk --update add ruby \
+                     libressl \
+                     ca-certificates \
+&& gem install --no-rdoc --no-ri sinatra \
 && gem clean \
 && rm -rf /usr/lib/ruby/gems/*/cache/* \
 && apk del openssl ca-certificates \
@@ -19,4 +18,3 @@ ADD docker-entrypoint.sh /
 EXPOSE 8000
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
