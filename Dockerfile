@@ -1,23 +1,18 @@
 # vim:set ft=dockerfile:
-FROM alpine:latest
+FROM andrius/alpine-ruby:latest
 
-MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
+LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
 
-RUN apk update \
-&& apk add ruby \
-&& apk add --virtual build-dependencies \
-           build-base \
-           ruby-dev \
-           ca-certificates \
-           libressl \
-           libressl-dev \
+RUN apk add --update --virtual .build-dependencies \
+            build-base \
+            ruby-dev \
 \
 && gem install --no-rdoc --no-ri \
+               webrick \
                sinatra \
-               json \
 \
 && gem cleanup \
-&& apk del build-dependencies \
+&& apk del .build-dependencies \
 && rm -rf /usr/lib/ruby/gems/*/cache/* \
           /var/cache/apk/* \
           /tmp/* \
