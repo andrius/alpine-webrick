@@ -1,4 +1,8 @@
-require 'sinatra'
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.setup
+Bundler.require
 require 'pp'
 
 set :bind, "0.0.0.0"
